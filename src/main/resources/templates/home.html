@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task Manager - Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:insert="~{fragments/header :: header(currentPage='home')}"></div>
+
+    <div class="container">
+        <h1>Welcome to Task Manager</h1>
+        <div class="grid-container">
+            <div class="grid-item">
+                <a href="/todos">TODO List</a>
+            </div>
+            <div class="grid-item">
+                <a href="/calendar">Calendar</a>
+            </div>
+            <div class="grid-item">
+                <a href="/settings">Settings</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

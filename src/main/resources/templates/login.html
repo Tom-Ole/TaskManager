@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Task Manager</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="auth-container">
+        <h1 class="auth-header">Login</h1>
+        <form th:action="@{/login}" method="post" class="auth-form">
+            <div class="auth-form-group">
+                <label for="username" class="auth-label">Username:</label>
+                <input type="text" id="username" name="username" class="auth-input" required>
+            </div>
+            <div class="auth-form-group">
+                <label for="password" class="auth-label">Password:</label>
+                <input type="password" id="password" name="password" class="auth-input" required>
+            </div>
+            <button type="submit" class="auth-btn">Login</button>
+        </form>
+        <div th:if="${param.error}" class="auth-error">
+            <p>Invalid username or password.</p>
+        </div>
+    </div>
+</body>
+</html>

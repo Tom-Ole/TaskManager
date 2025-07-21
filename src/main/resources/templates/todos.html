@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task Manager - Todos</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:insert="~{fragments/header :: header(currentPage='todos')}"></div>
+
+    <div class="container">
+        <h1>TODOS</h1>
+
+        <div th:if="${#lists.isEmpty(todos)}" class="todos-empty">
+            <p>No todos found.</p>
+        </div>
+
+        <div th:if="${!#lists.isEmpty(todos)}" class="todos-table-wrapper">
+            <table class="todos-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="todo : ${todos}">
+                        <td th:text="${todo.id}"></td>
+                        <td th:text="${todo.title}"></td>
+                        <td th:text="${todo.description}"></td>
+                        <td th:text="${todo.status}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

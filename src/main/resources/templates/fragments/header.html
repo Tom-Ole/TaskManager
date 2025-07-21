@@ -1,0 +1,28 @@
+<header class="header" th:fragment="header (currentPage)">
+    <h1 class="header-title"><a href="/">Task Manager</a></h1>
+    <nav class="header-nav">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="/todos" th:class="${currentPage == 'todos'} ? 'nav-active' : ''">TODO List</a></li>
+            <li class="nav-item"><a href="/calendar" th:class="${currentPage == 'calendar'} ? 'nav-active' : ''">Calendar</a></li>
+            <li class="nav-item"><a href="/settings" th:class="${currentPage == 'settings'} ? 'nav-active' : ''">Settings</a></li>
+        </ul>
+        <span>|</span>
+
+        <div class="user-info" sec:authorize="isAuthenticated()">
+            <div class="user-info-popup">
+                <span sec:authentication="principal.displayName">.</span>
+                <span sec:authentication="principal.email">.</span>
+                <span sec:authentication="principal.role">.</span>
+               
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="user-info" sec:authorize="!isAuthenticated()">
+            <a href="/login">Login</a>
+        </div>
+
+    </nav>
+</header>
