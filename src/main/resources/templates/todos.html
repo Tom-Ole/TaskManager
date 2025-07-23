@@ -8,7 +8,10 @@
     <div th:insert="~{fragments/header :: header(currentPage='todos')}"></div>
 
     <div class="container">
-        <h1>TODOS</h1>
+        <div>
+            <h1>TODOS</h1>
+            <a th:href="@{/todos/create}">Create</a>
+        </div>
 
         <div th:if="${#lists.isEmpty(todos)}" class="todos-empty">
             <p>No todos found.</p>
@@ -22,6 +25,7 @@
                         <th>Title</th>
                         <th>Description</th>
                         <th>Status</th>
+                        <th>Due Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +34,8 @@
                         <td th:text="${todo.title}"></td>
                         <td th:text="${todo.description}"></td>
                         <td th:text="${todo.status}"></td>
+                        <!-- todo.dueDate Format: 2025-07-28T16:51:44.377353 -->
+                        <td th:text="${#temporals.format(todo.dueDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
                     </tr>
                 </tbody>
             </table>

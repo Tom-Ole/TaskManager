@@ -1,6 +1,10 @@
 package com.taskmanager.taskmanager.entity;
 
 
+import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,14 +25,18 @@ public class Todo {
     @Enumerated(EnumType.STRING)
     private TODO_STATUS status;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime dueDate;
+
     // Constructors
     public Todo() {
     }
 
-    public Todo(String title, String description, TODO_STATUS status) {
+    public Todo(String title, String description, TODO_STATUS status, LocalDateTime dueDate) {
         this.title = title;
         this.description = description;
         this.status = status;
+        this.dueDate = dueDate;
     }
 
     // Getters and Setters
@@ -64,5 +72,12 @@ public class Todo {
         this.status = status;
     }
 
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
 
 }

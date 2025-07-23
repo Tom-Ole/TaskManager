@@ -1,5 +1,7 @@
 package com.taskmanager.taskmanager.component;
 
+import java.time.LocalDateTime;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +48,7 @@ public class DataInitializer implements CommandLineRunner {
                 todo.setTitle("Todo " + i);
                 todo.setDescription("Description for Todo " + i);
                 todo.setStatus(TODO_STATUS.PENDING);
+                todo.setDueDate(LocalDateTime.now().plusDays(i));
                 todoRepository.save(todo);
             }
             System.out.println("Initial todos created.");
