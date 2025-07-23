@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 import com.taskmanager.taskmanager.services.CustomUserDetailsService;
@@ -26,7 +28,19 @@ public class SecurityConfig {
         http.formLogin(form -> form
                 .loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/", true));
+                .successHandler((request, response, authentication) -> {
+                    SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);
+                    if (savedRequest != null) {
+                        String targetUrl = savedRequest.getRedirectUrl();
+                        // Cut out ?continue= if it exists
+                        if (targetUrl.contains("?continue")) {
+                            targetUrl = targetUrl.substring(0, targetUrl.indexOf("?continue"));
+                        }
+                        response.sendRedirect(targetUrl);
+                    } else {
+                        response.sendRedirect("/");
+                    }
+                }));
 
         http.logout(logout -> logout
                 .logoutUrl("/logout")
