@@ -80,4 +80,15 @@ public class Todo {
         this.dueDate = dueDate;
     }
 
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", dueDate=" + dueDate +
+                '}';
+    }
+
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Task Manager - Create Todos</title>
+    <title>Task Manager - Edit Todos</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
@@ -10,6 +10,7 @@
     <div class="container">
         <h1>Create a new Todo</h1>
         <form th:action="@{/todos/create}" th:object="${todo}" method="post" class="todo-form">
+            <input type="hidden" th:field="*{id}" name="id">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" th:field="*{title}" name="title" required>
@@ -28,9 +29,10 @@
             </div>
             <div class="form-group">
                 <label for="dueDate">Due Date</label>
-                <input type="datetime-local" th:field="*{dueDate}" name="dueDate" required>
+                <!-- Format of dueDateInputString is 2025-07-25T17:45 which should be the same as the input value of type datetime-local (mdn docs of input type datetime-local)-->
+                <input type="datetime-local" name="dueDate" th:value="${dueDateInputString}" required>
             </div>
-            <button type="submit">Create Todo</button>
+            <button type="submit">Update Todo</button>
         </form>
     </div>
 </body>

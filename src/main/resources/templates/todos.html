@@ -26,16 +26,24 @@
                         <th>Description</th>
                         <th>Status</th>
                         <th>Due Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="todo : ${todos}">
-                        <td th:text="${todo.id}"></td>
-                        <td th:text="${todo.title}"></td>
-                        <td th:text="${todo.description}"></td>
-                        <td th:text="${todo.status}"></td>
-                        <!-- todo.dueDate Format: 2025-07-28T16:51:44.377353 -->
-                        <td th:text="${#temporals.format(todo.dueDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                            <td th:text="${todo.id}"></td>
+                            <td th:text="${todo.title}"></td>
+                            <td th:text="${todo.description}"></td>
+                            <td th:text="${todo.status}"></td>
+                            <!-- todo.dueDate Format: 2025-07-28T16:51:44.377353 -->
+                            <td th:text="${#temporals.format(todo.dueDate, 'dd-MM-yyyy HH:mm')}"></td>
+
+                            <td>
+                                <a th:href="@{/todos/edit/{id}(id=${todo.id})}">Edit</a>
+                                <form th:action="@{/todos/delete/{id}(id=${todo.id})}" method="DELETE" style="display:inline;">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
                     </tr>
                 </tbody>
             </table>
